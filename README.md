@@ -1,0 +1,1 @@
+# API_Communication_Magalu_Test
