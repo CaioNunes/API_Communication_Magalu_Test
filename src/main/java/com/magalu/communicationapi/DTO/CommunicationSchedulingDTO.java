@@ -1,17 +1,13 @@
 package com.magalu.communicationapi.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.magalu.communicationapi.enums.CommunicationFormatEnum;
-import com.magalu.communicationapi.enums.ScheduleStatusEnum;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Repository;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -20,17 +16,23 @@ import java.time.LocalDateTime;
 public class CommunicationSchedulingDTO implements Serializable {
 
     @JsonProperty("id")
-    private String id;
+    private Long id;
 
+    @DateTimeFormat
+    @NotNull(message = "{date.time.submission.not.null}")
     @JsonProperty("dateTimeSubmission")
-    private String dateTimeSubmission;
+    private LocalDateTime dateTimeSubmission;
 
+    @NotBlank(message = "{receiver.not.blank}")
     @JsonProperty("receiver")
     private String receiver;
 
+    @NotBlank(message = "{message.not.blank}")
     @JsonProperty("message")
     private String message;
 
+    @NotBlank(message = "{communication.format.not.blank}")
+    @Pattern(regexp = "email|sms|push|whatsapp", message = "{communication.format.incorrect.pattern}")
     @JsonProperty("communicationFormat")
     private String communicationFormat;
 

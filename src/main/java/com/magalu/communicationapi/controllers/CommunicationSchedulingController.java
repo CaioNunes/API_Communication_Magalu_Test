@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -18,7 +21,7 @@ public class CommunicationSchedulingController {
     CommunicationSchedulingService communicationSchedulingService;
 
     @PostMapping("/scheduleCommunication")
-    public ResponseEntity<String> scheduleCommunication(@RequestBody CommunicationSchedulingDTO communicationSchedulingDTO){
+    public ResponseEntity<String> scheduleCommunication(@RequestBody @Valid CommunicationSchedulingDTO communicationSchedulingDTO){
         communicationSchedulingService.scheduleCommunication(communicationSchedulingDTO);
 
         return new ResponseEntity<>("Communication Scheduling successfully registered !", HttpStatus.CREATED);
