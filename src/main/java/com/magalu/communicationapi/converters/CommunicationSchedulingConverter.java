@@ -23,4 +23,16 @@ public class CommunicationSchedulingConverter {
         return communicationScheduling;
     }
 
+    public static CommunicationSchedulingDTO convertToDTO(CommunicationScheduling entity){
+        CommunicationSchedulingDTO communicationSchedulingDTO = new CommunicationSchedulingDTO();
+
+        communicationSchedulingDTO.setDateTimeSubmission(entity.getDateTimeSubmission().toString());
+        communicationSchedulingDTO.setReceiver(entity.getReceiver());
+        communicationSchedulingDTO.setMessage(entity.getMessage());
+        communicationSchedulingDTO.setCommunicationFormat(entity.getCommunicationFormat().getDescription());
+        communicationSchedulingDTO.setScheduleStatus(entity.getScheduleStatus().getDescription());
+
+        return communicationSchedulingDTO;
+    }
+
 }

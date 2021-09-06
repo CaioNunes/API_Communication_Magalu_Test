@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value="/communication-magalu/api", produces = "application/json")
@@ -20,6 +22,18 @@ public class CommunicationSchedulingController {
         communicationSchedulingService.scheduleCommunication(communicationSchedulingDTO);
 
         return new ResponseEntity<>("Communication Scheduling successfully registered !", HttpStatus.CREATED);
+    }
+
+    @GetMapping("/communicationSchedules")
+    public ResponseEntity<List<CommunicationSchedulingDTO>> getCommunicationSchedules(){
+        try{
+            List<CommunicationSchedulingDTO> communicationSchedules = communicationSchedulingService.getCommunicationSchedules();
+
+            return new ResponseEntity<>(communicationSchedules, HttpStatus.OK);
+
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }
