@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CommunicationSchedulingService {
@@ -39,5 +40,36 @@ public class CommunicationSchedulingService {
 
         return communicationSchedulesDTO;
     }
+
+    public CommunicationSchedulingDTO getCommunicationScheduling(Long id){
+        Optional<CommunicationScheduling> communicationSchedulingData = repository.findById(id);
+
+        if(communicationSchedulingData.isPresent()){
+            return CommunicationSchedulingConverter.convertToDTO(communicationSchedulingData.get());
+        } else {
+            return null;
+        }
+
+    }
+
+
+    public boolean cancelCommunicationScheduling(Long id){
+        boolean cancelled = false;
+        Optional<CommunicationScheduling> communicationSchedulingData = repository.findById(id);
+
+        if(communicationSchedulingData.isPresent()){
+            CommunicationScheduling communicationScheduling = communicationSchedulingData.get();
+            communicationScheduling.setScheduleStatus(ScheduleStatusEnum.CANCELLED);
+            repository.save(communicationScheduling);
+
+            cancelled = true;
+        }
+
+        return cancelled;
+
+    }
+
+
+
 
 }

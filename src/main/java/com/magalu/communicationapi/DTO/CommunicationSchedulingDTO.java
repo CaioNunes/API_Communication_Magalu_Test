@@ -19,6 +19,9 @@ import java.time.LocalDateTime;
 @Setter
 public class CommunicationSchedulingDTO implements Serializable {
 
+    @JsonProperty("id")
+    private String id;
+
     @JsonProperty("dateTimeSubmission")
     private String dateTimeSubmission;
 
@@ -31,6 +34,7 @@ public class CommunicationSchedulingDTO implements Serializable {
     @JsonProperty("communicationFormat")
     private String communicationFormat;
 
+    @JsonProperty("scheduleStatus")
     private String scheduleStatus;
 
 }

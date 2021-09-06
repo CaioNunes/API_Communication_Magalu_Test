@@ -25,11 +25,49 @@ public class CommunicationSchedulingController {
     }
 
     @GetMapping("/communicationSchedules")
-    public ResponseEntity<List<CommunicationSchedulingDTO>> getCommunicationSchedules(){
+    public ResponseEntity getCommunicationSchedules(){
         try{
             List<CommunicationSchedulingDTO> communicationSchedules = communicationSchedulingService.getCommunicationSchedules();
 
-            return new ResponseEntity<>(communicationSchedules, HttpStatus.OK);
+            if(communicationSchedules != null && !communicationSchedules.isEmpty()){
+                return new ResponseEntity<>(communicationSchedules, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("No communication schedules found !", HttpStatus.OK);
+            }
+
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/communicationScheduling/{id}")
+    public ResponseEntity getCommunicationSchedules(@PathVariable Long id){
+        try{
+            CommunicationSchedulingDTO communicationScheduling = communicationSchedulingService.getCommunicationScheduling(id);
+
+            if(communicationScheduling != null) {
+                return new ResponseEntity<>(communicationScheduling, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("No communication schedule found !", HttpStatus.OK);
+            }
+
+
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PatchMapping("/cancelCommunicationScheduling/{id}")
+    public ResponseEntity cancelCommunicationSchedule(@PathVariable Long id){
+        try{
+            boolean cancelled = communicationSchedulingService.cancelCommunicationScheduling(id);
+
+            if(cancelled) {
+                return new ResponseEntity<>("Communication schedule successfully canceled !", HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("No communication schedule found !", HttpStatus.OK);
+            }
+
 
         } catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
