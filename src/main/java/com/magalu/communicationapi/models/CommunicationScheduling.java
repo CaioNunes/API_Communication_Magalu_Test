@@ -1,22 +1,23 @@
-package com.magalu.communicationapi.entities;
+package com.magalu.communicationapi.models;
 
 import com.magalu.communicationapi.enums.CommunicationFormatEnum;
 import com.magalu.communicationapi.enums.ScheduleStatusEnum;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Repository;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Repository
+@Entity
 @Table(name="COMMUNICATION_SCHEDULING")
 @Getter
 @Setter
 public class CommunicationScheduling {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="ID")
+    private Long id;
 
     @Column(name="DATE_TIME_SUBMISSION")
     private LocalDateTime dateTimeSubmission;

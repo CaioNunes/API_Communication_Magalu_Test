@@ -5,10 +5,10 @@ import lombok.Getter;
 @Getter
 public enum CommunicationFormatEnum {
 
-    EMAIL(1, "E-Mail"),
-    SMS(2, "SMS"),
-    PUSH(3, "Push"),
-    WHATSAPP(4, "WhatsApp");
+    EMAIL(1, "email"),
+    SMS(2, "sms"),
+    PUSH(3, "push"),
+    WHATSAPP(4, "whatsapp");
 
     private Integer id;
     private String description;
@@ -16,6 +16,16 @@ public enum CommunicationFormatEnum {
     CommunicationFormatEnum(Integer id, String description){
         this.id = id;
         this.description = description;
+    }
+
+    public static CommunicationFormatEnum findCommunicationFormatByDescription(String description){
+        for(CommunicationFormatEnum communicationFormatEnum : CommunicationFormatEnum.values()){
+            if(communicationFormatEnum.getDescription().equals(description)){
+                return communicationFormatEnum;
+            }
+        }
+
+        return null;
     }
 
 }

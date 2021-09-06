@@ -17,4 +17,14 @@ public enum ScheduleStatusEnum {
         this.description = description;
     }
 
+    public static ScheduleStatusEnum findScheduleStatusByDescription(String description){
+        for(ScheduleStatusEnum scheduleStatus : ScheduleStatusEnum.values()){
+            if(scheduleStatus.getDescription().equals(description)){
+                return scheduleStatus;
+            }
+        }
+
+        return null;
+    }
+
 }

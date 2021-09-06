@@ -1,0 +1,26 @@
+package com.magalu.communicationapi.converters;
+
+import com.magalu.communicationapi.DTO.CommunicationSchedulingDTO;
+import com.magalu.communicationapi.enums.CommunicationFormatEnum;
+import com.magalu.communicationapi.enums.ScheduleStatusEnum;
+import com.magalu.communicationapi.models.CommunicationScheduling;
+
+import java.time.LocalDateTime;
+
+public class CommunicationSchedulingConverter {
+
+    public static CommunicationScheduling convertToEntity(CommunicationSchedulingDTO dto){
+        CommunicationScheduling communicationScheduling = new CommunicationScheduling();
+
+        LocalDateTime dateTimeSubmission = LocalDateTime.parse(dto.getDateTimeSubmission());
+
+        communicationScheduling.setDateTimeSubmission(dateTimeSubmission);
+        communicationScheduling.setReceiver(dto.getReceiver());
+        communicationScheduling.setMessage(dto.getMessage());
+        communicationScheduling.setCommunicationFormat(CommunicationFormatEnum.findCommunicationFormatByDescription(dto.getCommunicationFormat()));
+        communicationScheduling.setScheduleStatus(ScheduleStatusEnum.findScheduleStatusByDescription(dto.getScheduleStatus()));
+
+        return communicationScheduling;
+    }
+
+}
