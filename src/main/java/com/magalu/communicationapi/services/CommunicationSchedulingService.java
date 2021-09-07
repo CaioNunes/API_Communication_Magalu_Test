@@ -18,12 +18,12 @@ public class CommunicationSchedulingService {
     @Autowired
     CommunicationSchedulingRepository repository;
 
-    public void scheduleCommunication(CommunicationSchedulingDTO communicationSchedulingDTO){
+    public CommunicationSchedulingDTO scheduleCommunication(CommunicationSchedulingDTO communicationSchedulingDTO){
         communicationSchedulingDTO.setScheduleStatus(ScheduleStatusEnum.SCHEDULED.getDescription());
 
-        CommunicationScheduling communicationScheduling = CommunicationSchedulingConverter.convertToEntity(communicationSchedulingDTO);
+        CommunicationScheduling communicationScheduling =  repository.save(CommunicationSchedulingConverter.convertToEntity(communicationSchedulingDTO));
 
-        repository.save(communicationScheduling);
+        return CommunicationSchedulingConverter.convertToDTO(communicationScheduling);
     }
 
     public List<CommunicationSchedulingDTO> getCommunicationSchedules(){
@@ -51,7 +51,6 @@ public class CommunicationSchedulingService {
         }
 
     }
-
 
     public boolean cancelCommunicationScheduling(Long id){
         boolean cancelled = false;

@@ -13,12 +13,7 @@ public class CommunicationSchedulingConverter {
     public static CommunicationScheduling convertToEntity(CommunicationSchedulingDTO dto){
         CommunicationScheduling communicationScheduling = new CommunicationScheduling();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-
-        //LocalDateTime dateTimeSubmission = LocalDateTime.parse(dto.getDateTimeSubmission(), formatter);
-
         communicationScheduling.setId(dto.getId());
-        //communicationScheduling.setDateTimeSubmission(dateTimeSubmission);
         communicationScheduling.setDateTimeSubmission(dto.getDateTimeSubmission());
         communicationScheduling.setReceiver(dto.getReceiver());
         communicationScheduling.setMessage(dto.getMessage());
@@ -32,7 +27,6 @@ public class CommunicationSchedulingConverter {
         CommunicationSchedulingDTO communicationSchedulingDTO = new CommunicationSchedulingDTO();
 
         communicationSchedulingDTO.setId(entity.getId());
-        //communicationSchedulingDTO.setDateTimeSubmission(entity.getDateTimeSubmission().toString());
         communicationSchedulingDTO.setDateTimeSubmission(entity.getDateTimeSubmission());
         communicationSchedulingDTO.setReceiver(entity.getReceiver());
         communicationSchedulingDTO.setMessage(entity.getMessage());
