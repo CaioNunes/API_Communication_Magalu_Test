@@ -1,4 +1,6 @@
 # LuizaLabs - API Communication
 
-1. To view the Swagger, run the application and access the url: http://localhost:8080/swagger-ui.html
-2. To view the test report, just run 'mvn install' and access the file in the following path: target/site/jacoco/index.html
+1. To run the application, just have the docker installed and run the following command: 
+ `docker-compose up`
+2. To view the Swagger, after run the application, access the url: http://localhost:8080/swagger-ui.html
+
