@@ -18,6 +18,11 @@ public class CommunicationSchedulingService {
     @Autowired
     CommunicationSchedulingRepository repository;
 
+    /**
+     * Saves a communication schedule in the database, with the status of "Scheduled".
+     * @param communicationSchedulingDTO
+     * @return the communication schedule recorded
+     */
     public CommunicationSchedulingDTO scheduleCommunication(CommunicationSchedulingDTO communicationSchedulingDTO){
         communicationSchedulingDTO.setScheduleStatus(ScheduleStatusEnum.SCHEDULED.getDescription());
 
@@ -26,6 +31,11 @@ public class CommunicationSchedulingService {
         return CommunicationSchedulingConverter.convertToDTO(communicationScheduling);
     }
 
+
+    /**
+     * Retrieve all communication schedules.
+     * @return
+     */
     public List<CommunicationSchedulingDTO> getCommunicationSchedules(){
         List<CommunicationScheduling> communicationSchedules = repository.findAll();
 
@@ -41,7 +51,12 @@ public class CommunicationSchedulingService {
         return communicationSchedulesDTO;
     }
 
-    public CommunicationSchedulingDTO getCommunicationScheduling(Long id){
+    /**
+     * Find a communication schedule by id.
+     * @param id
+     * @return the communication schedule finded
+     */
+    public CommunicationSchedulingDTO getCommunicationSchedule(Long id){
         Optional<CommunicationScheduling> communicationSchedulingData = repository.findById(id);
 
         if(communicationSchedulingData.isPresent()){
@@ -52,7 +67,12 @@ public class CommunicationSchedulingService {
 
     }
 
-    public boolean cancelCommunicationScheduling(Long id){
+    /**
+     * Cancel a communication schedule by id.
+     * @param id
+     * @return a boolean if communication schedule is cancelled.
+     */
+    public boolean cancelCommunicationSchedule(Long id){
         boolean cancelled = false;
         Optional<CommunicationScheduling> communicationSchedulingData = repository.findById(id);
 
