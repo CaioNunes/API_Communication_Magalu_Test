@@ -1,12 +1,26 @@
 version: '3'
 
 services:
-  springboot-docker-compose-app-container:
-    image: API_Communication_Magalu_Test:1
+  app:
+    image: api_communication_magalu_test:1
     build:
       context: ./
       dockerfile: DockerFile
     volumes:
-      - /data/API_Communication_Magalu_Test
+      - /data/api_communication_magalu_test
     ports:
       - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres 
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+  
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
