@@ -27,7 +27,7 @@ public class CommunicationSchedulingServiceTest {
     CommunicationSchedulingRepository repository;
 
     @InjectMocks
-    CommunicationSchedulingService service;
+    CommunicationSchedulingServiceImpl service;
 
     private final String RECEIVER = "RECEIVER";
     private final String MESSAGE = "MESSAGE";
