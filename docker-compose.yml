@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  springboot-docker-compose-app-container:
+    image: API_Communication_Magalu_Test:1
+    build:
+      context: ./
+      dockerfile: DockerFile
+    volumes:
+      - /data/API_Communication_Magalu_Test
+    ports:
+      - "8080:8080"
